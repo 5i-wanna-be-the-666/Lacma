@@ -134,9 +134,9 @@ class XLM_R(nn.Module):
     def __init__(self, large, temp_dir, finetune=True, num_languages=3):
         super(XLM_R, self).__init__()
         if large:
-            self.model = XLMRobertaModel.from_pretrained("/mnt/raid5/lhy/project/PreSumm_cino/CINO")
+            self.model = XLMRobertaModel.from_pretrained("hfl/cino-large-v2")
         else:
-            self.model = XLMRobertaModel.from_pretrained("/mnt/raid5/lhy/project/PreSumm_cino/CINO")
+            self.model = XLMRobertaModel.from_pretrained("hfl/cino-large-v2")
         self.finetune = finetune
         self.num_languages = num_languages
         self.language_embedding = nn.Embedding(num_embeddings=num_languages, embedding_dim=self.model.config.hidden_size)
@@ -170,7 +170,7 @@ class ExtSummarizer(nn.Module):
         self.device = device
         self.xlm_r = XLM_R(args.use_classfier, args.temp_dir, args.finetune_bert)
         
-        xlmr_config = XLMRobertaConfig.from_pretrained("/mnt/raid5/lhy/project/PreSumm_cino/CINO")
+        xlmr_config = XLMRobertaConfig.from_pretrained("hfl/cino-large-v2")
         self.ext_layer = ExtTransformerEncoder(self.xlm_r.model.config.hidden_size, args.ext_ff_size, args.ext_heads,
                                                args.ext_dropout, args.ext_layers)
         if (args.encoder == 'baseline'):
@@ -212,13 +212,13 @@ class AbsSummarizer(nn.Module):
         self.device = device
         self.xlm_r = XLM_R(args.large, args.temp_dir, args.finetune_bert)
 
-        xlmr_config = XLMRobertaConfig.from_pretrained("/mnt/raid5/lhy/project/PreSumm_cino/CINO")
+        xlmr_config = XLMRobertaConfig.from_pretrained("hfl/cino-large-v2")
         if bert_from_extractive is not None:
             self.xlm_r.model.load_state_dict(
                 dict([(n[12:], p) for n, p in bert_from_extractive.items() if n.startswith('xlm_r.model')]), strict=True)
 
         if (args.encoder == 'baseline'):
-            xlmr_config = XLMRobertaConfig.from_pretrained("/mnt/raid5/lhy/project/PreSumm_cino/CINO")
+            xlmr_config = XLMRobertaConfig.from_pretrained("hfl/cino-large-v2")
             self.xlm_r.model = XLMRobertaModel(xlmr_config)
 
         if(args.max_pos>512):

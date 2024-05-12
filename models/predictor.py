@@ -13,7 +13,7 @@ from onmt.translate import GNMTGlobalScorer
 from transformers import XLMRobertaTokenizer
 from tqdm import tqdm
 
-tokenizer = XLMRobertaTokenizer.from_pretrained("/mnt/raid5/lhy/project/PreSumm_cino/CINO")
+tokenizer = XLMRobertaTokenizer.from_pretrained("hfl/cino-large-v2")
 def truncate_context_to_fit_tokenizer(context, tokenizer, max_length=512):
     # 首先对原始的context进行分词
     context_tokens = tokenizer.tokenize(context)
@@ -229,7 +229,7 @@ class Translator(object):
         self.model = model
         self.generator = self.model.generator
         self.vocab = vocab
-        self.tokenizer = XLMRobertaTokenizer.from_pretrained("/mnt/raid5/lhy/project/PreSumm_cino/CINO")
+        self.tokenizer = XLMRobertaTokenizer.from_pretrained("hfl/cino-large-v2")
         self.symbols = symbols
         self.start_token = symbols['BOS']
         self.end_token = symbols['EOS']

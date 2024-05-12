@@ -111,7 +111,7 @@ class Lacmia(nn.Module):
         self.language = language
         self.model_path = model_path
 
-        self.config = XLMRobertaConfig.from_pretrained("/mnt/raid5/lhy/project/PreSumm_cino/CINO")
+        self.config = XLMRobertaConfig.from_pretrained("hfl/cino-large-v2")
         self.model = AbsSummarizer(self.args, device)
         self.device = device
         

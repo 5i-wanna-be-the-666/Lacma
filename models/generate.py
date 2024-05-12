@@ -21,7 +21,7 @@ from models.predictor import build_predictor
 from torchsummary import summary
 from transformers import XLMRobertaTokenizer
 
-tokenizer = XLMRobertaTokenizer.from_pretrained("/mnt/raid5/lhy/project/PreSumm_cino/CINO")
+tokenizer = XLMRobertaTokenizer.from_pretrained("hfl/cino-large-v2")
 
 
 
@@ -242,7 +242,7 @@ def generate(model, args, contexts, device, model_path='', batch_size=1, languag
     # test_iter = data_loader.Dataloader(args, load_dataset(args, 'test', shuffle=False),
     #                                    args.test_batch_size, device,
     #                                    shuffle=False, is_test=True)
-    tokenizer = XLMRobertaTokenizer.from_pretrained("/mnt/raid5/lhy/project/PreSumm_cino/CINO")
+    tokenizer = XLMRobertaTokenizer.from_pretrained("hfl/cino-large-v2")
     symbols = {
     'BOS': tokenizer.convert_tokens_to_ids(tokenizer.cls_token),
     'EOS': tokenizer.convert_tokens_to_ids(tokenizer.sep_token),
