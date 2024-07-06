@@ -62,7 +62,7 @@ args_dict = {
     'temp_dir': '../temp',
     'test_all': False,
     'test_batch_size': 8000,
-    'test_from': '',#../results/Abs/combine-3/all/model_step_80000.pt
+    'test_from': '',
     'test_start_from': -1,
     'train_from': '',
     'train_steps': 1000,
@@ -111,7 +111,7 @@ class Lacmia(nn.Module):
         self.language = language
         self.model_path = model_path
 
-        self.config = XLMRobertaConfig.from_pretrained("hfl/cino-large-v2")
+        self.config = XLMRobertaConfig.from_pretrained("/mnt/raid5/lhy/project/PreSumm_cino/CINO")
         self.model = AbsSummarizer(self.args, device)
         self.device = device
         

@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name='Lacmia',
-    version='1.0.0',
+    version='1.0.1',
     description='Chinese Minority Abstractive Multi-language summarization project',
     long_description=long_description,  # 将README内容作为long_description
     long_description_content_type="text/markdown",  # 指定long_description的格式为markdown
@@ -18,6 +18,7 @@ setup(
         'numpy',
         'tqdm',
         'transformers',
+        'OpenNMT-py',
     ],
     classifiers=[
         'Programming Language :: Python :: 3',

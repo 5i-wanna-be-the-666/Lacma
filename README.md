@@ -20,14 +20,33 @@ pip install Lacmia
 ## 快速上手
 下面是如何使用 Lacmia 生成一个简单的文本摘要的例子：
 
-```bash
-from models.Lacmia import Lacmia
+```python
+from Lacmia.models.Lacmia import Lacmia
 
 text = ["这里是需要生成摘要的文本内容列表。"]
 model = Lacmia()
 
-Abstractive = Lacmia.Abstractive(text,batch_size=1)
+#use in chinese 
+Abstractive = model.Abstractive(text,batch_size=1) # or Abstractive = model.Abstractive(text, language='zh', batch_size=1)
+
+#use in Tibetan
+#Abstractive = model.Abstractive(text, language='bo', batch_size=1)
+#use in Uyghur
+#Abstractive = model.Abstractive(text, language='ug', batch_size=1)
 ```
+## 模型下载地址
+| size | type         | link                |
+|------|--------------|---------------------|
+| 450M | Lacmia-base | [即将发表](https://www.runoob.com) |
+| 420M | Lacmia-all   | [即将发表](https://www.runoob.com) |
+
+之后您可以这样使用模型
+```python
+from Lacmia.models.Lacmia import Lacmia
+device = 'cpu' # or gpu(cuda)
+model = Lacmia(model_path=your_model_path, device=device)
+```
+
 
 ## 支持的语言
 目前，Lacmia 支持以下民族语言的摘要生成：

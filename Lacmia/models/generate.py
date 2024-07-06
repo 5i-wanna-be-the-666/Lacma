@@ -11,17 +11,15 @@ import torch
 from transformers import XLMRobertaTokenizer
 
 
-from models import model_builder
-# from models.data_loader import load_dataset
-# from models.loss import abs_loss
+from . import model_builder
 from torch.utils.data import DataLoader, TensorDataset
 from torch.utils.data import Dataset
-from models.model_builder import AbsSummarizer
-from models.predictor import build_predictor
+from .model_builder import AbsSummarizer
+from .predictor import build_predictor
 from torchsummary import summary
 from transformers import XLMRobertaTokenizer
 
-tokenizer = XLMRobertaTokenizer.from_pretrained("hfl/cino-large-v2")
+tokenizer = XLMRobertaTokenizer.from_pretrained("/mnt/raid5/lhy/project/PreSumm_cino/CINO")
 
 
 
@@ -229,20 +227,9 @@ def generate(model, args, contexts, device, model_path='', batch_size=1, languag
 
     
 
-    #checkpoint = torch.load(test_from, map_location=lambda storage, loc: storage)
-    #opt = vars(checkpoint['opt'])
-    # for k in opt.keys():
-    #     if (k in model_flags):
-    #         setattr(args, k, opt[k])
-    #print(args)
-
-    #model = AbsSummarizer(args, device, checkpoint)
     model.eval()
     test_iter = process_text_2_test_iter(contexts, device, batch_size=batch_size, language = language)
-    # test_iter = data_loader.Dataloader(args, load_dataset(args, 'test', shuffle=False),
-    #                                    args.test_batch_size, device,
-    #                                    shuffle=False, is_test=True)
-    tokenizer = XLMRobertaTokenizer.from_pretrained("hfl/cino-large-v2")
+    tokenizer = XLMRobertaTokenizer.from_pretrained("/mnt/raid5/lhy/project/PreSumm_cino/CINO")
     symbols = {
     'BOS': tokenizer.convert_tokens_to_ids(tokenizer.cls_token),
     'EOS': tokenizer.convert_tokens_to_ids(tokenizer.sep_token),
